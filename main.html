@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANS-MD WHATSAPP BOT</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    /* Create a dynamic background effect */
+    .bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://files.catbox.moe/t8wadi.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      animation: techBackground 10s infinite linear;
+    }
+
+    @keyframes techBackground {
+      0% { filter: brightness(1) contrast(1); }
+      50% { filter: brightness(0.7) contrast(1.2); }
+      100% { filter: brightness(1) contrast(1); }
+    }
+
+    /* Frame to contain all content */
+    .frame {
+      position: relative;
+      padding: 5%;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+      width: 90%;
+      max-width: 210px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      perspective: 500px; /* Adds perspective for 3D effect */
+    }
+
+    /* 3D Typing Effect */
+    .typing {
+      font-size: 8vw;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1rem;
+      display: inline-block;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(40) infinite, blink 1s step-end infinite;
+      text-shadow: 2px 2px 4px rgba(0, 255, 255, 0.6), 3px 3px 5px rgba(0, 255, 255, 0.4);
+      transform: rotateX(15deg); /* 3D rotation */
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      from { border-color: transparent; }
+      to { border-color: white; }
+    }
+
+    /* Button Container - Grid Layout */
+    .buttons-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      gap: 20px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    /* Button Styles */
+    .btn {
+      padding: 15px;
+      font-size: 4vw;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 3s ease, transform 0.3s ease-in-out, box-shadow 3s ease;
+      color: #fff;
+      min-width: 70px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3), 0 8px 25px rgba(0, 255, 255, 0.2);
+      text-shadow: 1px 1px 1px rgba(0, 255, 255, 0.7), 0 2px 5px rgba(0, 255, 255, 0.5); /* 3D text shadow */
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5), 0 15px 45px rgba(0, 255, 255, 0.4);
+    }
+
+    .btn:focus {
+      outline: none;
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.8), 0 20px 60px rgba(0, 255, 255, 0.6);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Background Image -->
+  <div class="bg"></div>
+
+  <!-- Audio Player -->
+  <audio id="background-music" src="https://files.catbox.moe/4k5qjf.mp3" loop autoplay></audio>
+
+  <div class="frame">
+    <!-- Heading with Typing Animation -->
+    <div class="typing">HANS MD PAIR</div>
+    <h6>HANS MD PAIR CREATED BY HANSTZ</h6>
+
+    <!-- Buttons Container -->
+    <div class="buttons-container">
+      <button onclick="window.open('https://venocyber-md-qr.onrender.com')" class="btn">QR Code</button>
+      <button onclick="window.open('/pair')" class="btn">Pair Code</button>
+      <button onclick="window.open('https://github.com/Mrhanstz/HANS-MD.git')" class="btn">Bot Repo</button>
+      <button onclick="window.open('https://wa.me/255711782669')" class="btn">Contact Me</button>
+      <button onclick="window.open('https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31')" class="btn">Wa Group</button>
+      <button onclick="window.open('https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31')" class="btn">Wa Channel</button>
+      <button onclick="window.open('https://youtube.com/@HANSTZ-TECH')" class="btn">YouTube</button>
+      <button onclick="window.open('https://wa.me/255756530143')" class="btn" id="last-button">Contact HansTz-Tech</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to generate random colors
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Function to apply random color to all buttons
+    function changeButtonColors() {
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(button => {
+        let randomColor = getRandomColor();
+        button.style.backgroundColor = randomColor;
+        button.style.boxShadow = `0 5px 15px ${randomColor}, 0 8px 25px ${randomColor}`;
+      });
+    }
+
+    // Apply random color every 1 seconds with slow transition
+    setInterval(changeButtonColors, 1111); // Change color every 3 seconds
+
+    // Control audio playback when the user is on and off the page
+    const backgroundMusic = document.getElementById('background-music');
+
+    window.addEventListener('focus', () => {
+      backgroundMusic.play();
+    });
+
+    window.addEventListener('blur', () => {
+      backgroundMusic.pause();
+    });
+  </script>
+
+</body>
+</html>

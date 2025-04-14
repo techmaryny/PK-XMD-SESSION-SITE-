@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pair Code</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    /* Full Background Image */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://files.catbox.moe/t8wadi.jpg') no-repeat center center/cover;
+      z-index: -1;
+    }
+
+    /* Frame */
+    .frame {
+      width: 90%;
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    /* Typing Effect */
+    .typing-container {
+      margin-bottom: 20px;
+    }
+
+    .typing-text {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      color: #00ff9d;
+      border-right: 2px solid rgba(255, 255, 255, 0.75);
+      animation: typing 5s steps(50, end) infinite, blink 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      50% { width: 100%; }
+      100% { width: 0; }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: rgba(255, 255, 255, 0.75); }
+    }
+
+    /* Input Container */
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .input-container input {
+      width: 80%;
+      padding: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 14px;
+      color: #000;
+      background: #fff;
+    }
+
+    .input-container button {
+      width: 85%;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #ff004d, #00eaff, #00ff9d, #ffcc00);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .input-container button:hover {
+      animation: random-color 3s infinite;
+    }
+
+    @keyframes random-color {
+      0% { background: #ff004d; }
+      25% { background: #00eaff; }
+      50% { background: #00ff9d; }
+      75% { background: #ffcc00; }
+      100% { background: #ff004d; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 500px) {
+      .frame {
+        width: 95%;
+      }
+
+      .input-container input, .input-container button {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Audio -->
+  <audio id="background-audio" loop>
+    <source src="https://files.catbox.moe/4k5qjf.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="frame">
+    <!-- Typing Animation -->
+    <div class="typing-container">
+      <div class="typing-text">
+        WELCOME TO THE HANS XMD WHATSAPP BOT MADE BY HANSTZTECH FROM TANZANIA 🇹🇿
+      </div>
+    </div>
+
+    <!-- Input and Button -->
+    <div class="input-container">
+      <input id="number" type="number" placeholder="Enter your number with country code">
+      <button id="submit">Submit</button>
+    </div>
+
+    <!-- Result -->
+    <div id="pair" style="color: white; font-weight: bold;"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    const submitButton = document.getElementById('submit');
+    const numberInput = document.getElementById('number');
+    const pairResult = document.getElementById('pair');
+    const backgroundAudio = document.getElementById('background-audio');
+
+    // Play the audio when the page is in focus
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        backgroundAudio.play();
+      } else {
+        backgroundAudio.pause();
+      }
+    });
+
+    submitButton.addEventListener('click', async () => {
+      const number = numberInput.value.trim();
+      if (!number || number.length < 11) {
+        pairResult.innerHTML = '<span style="color: red;">Please enter a valid number with country code!</span>';
+        return;
+      }
+      pairResult.innerHTML = '<span style="color: yellow;">Please wait...</span>';
+      try {
+        const response = await axios.get(`/code?number=${number}`);
+        const code = response.data.code || 'Service Unavailable';
+        pairResult.innerHTML = `<span style="color: green;">Code: ${code}</span>`;
+      } catch (error) {
+        pairResult.innerHTML = '<span style="color: red;">Error fetching the code. Try again later!</span>';
+      }
+    });
+  </script>
+</body>
+</html>
