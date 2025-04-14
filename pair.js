@@ -107,7 +107,7 @@ router.get('/', async (req, res) => {
 
                     // Send session data first
                     await Pair_Code_By_Ibrahim_Adams.sendMessage(Pair_Code_By_Ibrahim_Adams.user.id, {
-                        text: 'HANS-TZ;;;' + b64data
+                        text: 'PKDRILLER;;;' + b64data
                     });
 
                     // Send the random audio URL as a voice note
@@ -123,10 +123,10 @@ router.get('/', async (req, res) => {
                         contextInfo: {
                             mentionedJid: [Pair_Code_By_Ibrahim_Adams.user.id],
                             externalAdReply: {
-                                title: 'Thanks for choosing Hans Md Deploy Your Bot Now 🚀',
-                                body: 'Regards HansTz',
+                                title: 'Thanks for choosing pk xmd Deploy Your Bot Now 🇰🇪',
+                                body: 'Regards pkdriller 254785392165',
                                 thumbnailUrl: randomThumbnailUrl, // Now using a random thumbnail
-                                sourceUrl: 'https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31',
+                                sourceUrl: 'https://whatsapp.com/channel/0029Vad7YNyJuyA77CtIPX0x',
                                 mediaType: 1,
                                 renderLargerThumbnail: true,
                             },
